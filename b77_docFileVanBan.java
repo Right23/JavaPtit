@@ -11,6 +11,7 @@ public class b77_docFileVanBan {
         Scanner sc = new Scanner(new File("DATA.in"));
         while (sc.hasNext()) {
             System.out.println(sc.nextLine());
+            // System.out.println(sc.next());
         }
     }
 }

@@ -1,70 +1,73 @@
-/* Author: NgTienHungg */
-
-import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Scanner;
 
-class PhanSo {
+class sp {
+    private String name, id, ma;
+    private int price, sl, bonus;
 
-    private long tuSo;
-    private long mauSo;
-
-    public PhanSo(long tuSo, long mauSo) {
-        this.tuSo = tuSo;
-        this.mauSo = mauSo;
+    public sp(String name, String id, int price, int sl) {
+        this.name = name;
+        this.id = id;
+        this.price = price;
+        this.sl = sl;
+        this.bonus = bonus();
+        this.ma = getMa();
     }
 
-    public long getTuSo() {
-        return tuSo;
+    public String getId() {
+        return this.id;
     }
 
-    public long getMauSo() {
-        return mauSo;
+    public String getMa() {
+        String res = id.substring(4);
+        return (res);
     }
 
-    public static long gcdThing(long a, long b) {
-        BigInteger b1 = BigInteger.valueOf(a);
-        BigInteger b2 = BigInteger.valueOf(b);
-        BigInteger gcd = b1.gcd(b2);
-        return gcd.longValue();
+    public int SL() {
+        return this.sl;
     }
 
-    public static PhanSo rutGon(PhanSo a) {
-        long gcd = gcdThing(a.tuSo, a.mauSo);
-        PhanSo ans = new PhanSo(a.tuSo / gcd, a.mauSo / gcd);
-        return ans;
+    public int gia() {
+        return this.price;
     }
 
-    @Override
+    public int bonus() {
+        if (this.ma == "1") {
+            return price * sl * 3 / 10;
+        }
+        return price * sl * 5 / 10;
+
+    }
+
+    public String stt() {
+        return this.id.substring(1, 4);
+    }
+
+    public int total() {
+        return gia() * SL();
+    }
+
     public String toString() {
-        return tuSo + "/" + mauSo;
+        return name + " " + id + " " + stt() + " " + bonus + " " + total();
     }
 }
 
-public class ab155_tinhToanPhanSo {
-
-    static Scanner scanner = new Scanner(System.in);
-
+public class a {
     public static void main(String[] args) {
-        int t = scanner.nextInt();
-        while (t-- > 0) {
-            solution();
+        Scanner sc = new Scanner(System.in);
+        ArrayList<sp> arr = new ArrayList<>();
+        int n = Integer.parseInt(sc.nextLine());
+        while (n-- > 0) {
+            String name = sc.nextLine();
+            String id = sc.nextLine();
+            int price = Integer.parseInt(sc.nextLine());
+            int sl = Integer.parseInt(sc.nextLine());
+            sp x = new sp(name, id, price, sl);
+            arr.add(x);
+        }
+        for (sp i : arr) {
+            System.out.println(i);
         }
     }
 
-    public static void solution() {
-        PhanSo phanSoA = new PhanSo(scanner.nextLong(), scanner.nextLong());
-        PhanSo phanSoB = new PhanSo(scanner.nextLong(), scanner.nextLong());
-
-        // C = (A + B) ^ 2
-        PhanSo phanSoC = new PhanSo(
-                (long) Math.pow(phanSoA.getTuSo() * phanSoB.getMauSo() + phanSoB.getTuSo() * phanSoA.getMauSo(), 2),
-                (long) Math.pow(phanSoA.getMauSo() * phanSoB.getMauSo(), 2));
-        phanSoC = PhanSo.rutGon(phanSoC);
-
-        // D = A x B x C
-        PhanSo phanSoD = new PhanSo(phanSoA.getTuSo() * phanSoB.getTuSo() * phanSoC.getTuSo(),
-                phanSoA.getMauSo() * phanSoB.getMauSo() * phanSoC.getMauSo());
-        phanSoD = PhanSo.rutGon(phanSoD);
-        System.out.println(phanSoC + " " + phanSoD);
-    }
 }

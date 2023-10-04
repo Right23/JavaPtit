@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 // import java.lang.Math;
 
@@ -26,11 +29,16 @@ class Pair<K, V> {
         return true;
     }
 
+    // public boolean isPrime() {
+    // if (checkPrime(Integer.parseInt(key.toString())) &&
+    // checkPrime(Integer.parseInt(value.toString()))) {
+    // return true;
+    // }
+    // return false;
+    // }
+
     public boolean isPrime() {
-        if (checkPrime(Integer.parseInt(key.toString())) && checkPrime(Integer.parseInt(value.toString()))) {
-            return true;
-        }
-        return false;
+        return (checkPrime((Integer) key) && checkPrime((Integer) value));
     }
 
     public String toString() {
@@ -38,22 +46,22 @@ class Pair<K, V> {
     }
 }
 
-public class b158_lopPair {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+public class b87lopPair {
+    public static void main(String[] args) throws IOException {
+        Scanner sc = new Scanner(new File("DATA.in"));
         int t = sc.nextInt();
         while (t-- > 0) {
             int n = sc.nextInt();
-            boolean ok = false;
-            for (int i = 2; i <= n / 2; i++) {
+            boolean check = false;
+            for (int i = 2; i <= 2 * Math.sqrt(n); i++) {
                 Pair<Integer, Integer> p = new Pair<>(i, n - i);
                 if (p.isPrime()) {
                     System.out.println(p);
-                    ok = true;
+                    check = true;
                     break;
                 }
             }
-            if (!ok) {
+            if (!check) {
                 System.out.println(-1);
             }
         }
