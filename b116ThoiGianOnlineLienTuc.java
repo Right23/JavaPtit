@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.text.ParseException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -7,11 +8,11 @@ import java.util.Collections;
 import java.util.Scanner;
 import java.io.File;
 
-class Ps implements Comparable<Ps> {
+class Ps1 implements Comparable<Ps1> {
     private String name;
     private int minutes;
 
-    public Ps(String name, LocalDateTime start, LocalDateTime end) {
+    public Ps1(String name, LocalDateTime start, LocalDateTime end) {
         this.name = name;
         this.minutes = calculate(start, end);
     }
@@ -34,7 +35,7 @@ class Ps implements Comparable<Ps> {
         return name + " " + minutes;
     }
 
-    public int compareTo(Ps o) {
+    public int compareTo(Ps1 o) {
         if (this.minutes == o.getMinutes()) {
             return this.name.compareTo(o.getName());
         }
@@ -48,19 +49,19 @@ public class b116ThoiGianOnlineLienTuc {
         return LocalDateTime.parse(input, formatter);
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, ParseException {
         Scanner sc = new Scanner(new File("ONLINE.in"));
-        ArrayList<Ps> arr = new ArrayList<>();
+        ArrayList<Ps1> arr = new ArrayList<>();
         int n = Integer.parseInt(sc.nextLine());
         while (n-- > 0) {
             String name = sc.nextLine();
             LocalDateTime start = parseDateTime(sc.nextLine());
             LocalDateTime end = parseDateTime(sc.nextLine());
-            Ps x = new Ps(name, start, end);
+            Ps1 x = new Ps1(name, start, end);
             arr.add(x);
         }
         Collections.sort(arr);
-        for (Ps i : arr) {
+        for (Ps1 i : arr) {
             System.out.println(i);
         }
     }

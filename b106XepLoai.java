@@ -5,16 +5,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-class Student implements Comparable<Student> {
+class Student2 implements Comparable<Student2> {
     private String id, name, status;
-    private int lt, ol, test;
+    private float lt, ol, test;
     public static int num = 1;
 
-    public Student(String name, String lt, String ol, String test) {
+    public Student2(String name, float lt, float ol, float test) {
         this.name = normalize(name);
-        this.lt = Integer.parseInt(lt);
-        this.ol = Integer.parseInt(ol);
-        this.test = Integer.parseInt(test);
+        this.lt = lt;
+        this.ol = ol;
+        this.test = test;
         this.id = String.format("SV%02d", num++);
         this.status = getStatus();
     }
@@ -32,29 +32,32 @@ class Student implements Comparable<Student> {
         return res;
     }
 
-    public Float avg(int lt, int ol, int test) {
+    public Float avg() {
         // return (2.5f*lt+3.5f*ol+4.0f*test);
-        return (float) ((25 * lt + 35 * ol + 40 * test) / 100);
+        return (25 * lt + 35 * ol + 40 * test) / 100;
     }
 
     public String getStatus() {
-        if (avg(lt, ol, test) >= 8) {
+        if (avg() >= 8) {
             return "GIOI";
-        } else if (avg(lt, ol, test) >= 6.5) {
+        } else if (avg() >= 6.5) {
             return "KHA";
-        } else if (avg(lt, ol, test) >= 5) {
-            return "TRUNGBINH";
+        } else if (avg() >= 5) {
+            return "TRUNG BINH";
         } else {
             return "KEM";
         }
     }
 
     public String toString() {
-        return id + " " + name + " " + String.format("%.2f", avg(lt, ol, test)) + " " + status;
+        return id + " " + name + " " + String.format("%.2f", avg()) + " " + status;
     }
 
-    public int compareTo(Student o) {
-        return -(int) (this.avg(lt, ol, test) - o.avg(lt, ol, test));
+    public int compareTo(Student2 o) {
+        if (this.avg() > o.avg()) {
+            return -1;
+        }
+        return 1;
     }
 }
 
@@ -62,18 +65,18 @@ public class b106XepLoai {
     public static void main(String[] args) throws FileNotFoundException, ParseException {
         Scanner sc = new Scanner(new File("BANGDIEM.in"));
         // Scanner sc = new Scanner(System.in);
-        ArrayList<Student> arr = new ArrayList<>();
+        ArrayList<Student2> arr = new ArrayList<>();
         int n = Integer.parseInt(sc.nextLine());
         while (n-- > 0) {
             String name = sc.nextLine().trim();
-            String lt = sc.nextLine().trim();
-            String ol = sc.nextLine().trim();
-            String test = sc.nextLine().trim();
-            Student a = new Student(name, lt, ol, test);
+            float lt = Float.parseFloat(sc.nextLine().trim());
+            float ol = Float.parseFloat(sc.nextLine().trim());
+            float test = Float.parseFloat(sc.nextLine().trim());
+            Student2 a = new Student2(name, lt, ol, test);
             arr.add(a);
         }
         Collections.sort(arr);
-        for (Student i : arr) {
+        for (Student2 i : arr) {
             System.out.println(i);
         }
     }

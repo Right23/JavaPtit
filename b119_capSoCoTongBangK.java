@@ -10,8 +10,8 @@ public class b119_capSoCoTongBangK {
             int n = sc.nextInt();
             long k = sc.nextLong();
             long[] a = new long[n];
-            long[] c = new long[(int) 1e18];// the nay la dc roi
-            // Arrays.fill(c, 0);// co the thay 0 bang gia tri khac
+            long[] c = new long[(int) 1e9];// the nay la dc roi
+            Arrays.fill(c, 0);// co the thay 0 bang gia tri khac
             for (int i = 0; i < n; i++) {
                 a[i] = sc.nextLong();
                 c[(int) a[i]]++;
